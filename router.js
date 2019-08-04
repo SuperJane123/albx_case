@@ -15,4 +15,8 @@ router.get('/',pagesController.indexHtml)
 
 
 // 3.处理阿里白秀detail页面
-.get('/detail',pagesController.detailHtml)
+.get('/detail',pagesController.detailHtml);
+
+
+
+module.exports = router;
