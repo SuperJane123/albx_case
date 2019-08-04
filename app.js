@@ -29,3 +29,6 @@ app.set('views',__dirname+'/views');
 // 引入router来判断不同的请求
 app.use(router)
 
+
+
+
