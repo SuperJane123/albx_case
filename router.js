@@ -8,14 +8,14 @@ const pagesController = require('./controllers/pagesController');
 
 // ---------前端页面处理区域-----------
 // 1.处理阿里白秀index页面
-router.get('/',pagesController.indexHtml)
+router.get('/index',pagesController.indexHtml)
 
 // 2.处理阿里白秀list页面
 .get('/list',pagesController.listHtml)
 
 
 // 3.处理阿里白秀detail页面
-.get('/detail',pagesController.detailHtml);
+.get('/detail',pagesController.detailHtml)
 
 
 
@@ -27,7 +27,7 @@ router.get('/',pagesController.indexHtml)
 // ---------后端页面处理区域-----------
 
 // 1.处理后台index页面
-.get('/admin',pagesController.adminIndexHtml)
+.get('/admin/index',pagesController.adminIndexHtml)
 
 
 // 2.处理后台categories页面
