@@ -3,7 +3,6 @@
 // 引入模块区域
 const express = require('express');
 const app = express();
-const router = require('./router');
 
 
 
@@ -23,11 +22,6 @@ app.set('view engine','ejs');
 
 // 设置使用模板的默认目录
 app.set('views',__dirname+'/views');
-
-
-
-// 引入router来判断不同的请求
-app.use(router)
 
 
 
