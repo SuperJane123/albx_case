@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const pagesController = require('./controllers/pagesController');
+const userController = require('./controllers/userController')
 
 
 
@@ -74,6 +75,12 @@ router.get('/index',pagesController.indexHtml)
 .get('/admin/comments',pagesController.commentsHtml)
 
 
+
+
+
+
+// ---------API接口处理区域-----------
+.post('/login',userController.login);
 
 
 

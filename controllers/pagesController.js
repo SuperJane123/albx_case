@@ -1,5 +1,6 @@
 // 这个模块主要负责处理数据返回给客户
 
+const queryString = require('querystring');
 
 // ---------前端页面处理区域-----------
 
@@ -31,7 +32,24 @@ exports.detailHtml = (req,res)=>{
 
 // 1.负责处理后台admin里的index页面
 exports.adminIndexHtml = (req,res)=>{
-    res.render('admin/index');
+    // var mycookie = queryString.parse(req.headers.cookie);
+    // if(mycookie)
+    // 判断是有有cookis，如果有，才跳转页面
+    if(req.session.isLogin && req.session.isLogin =='true'){
+        res.render('admin/index');
+    }else {
+        // 重向定义
+        res.writeHead(301,{
+            'Location': '/admin/login'
+        });
+        res.end()
+        
+    };
+    
+
+
+
+    
 };
 
 
