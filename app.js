@@ -26,6 +26,8 @@ app.use(session ({
     saveUninitialized: true,  //强制没有初始化的session保存到storage中
 }));
 
+
+
 // 设置模板引擎
 app.set('view engine','ejs');
 
@@ -34,6 +36,11 @@ app.set('views',__dirname+'/views');
 
 // 配置body-parser
 app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+
+
+//设置导航守卫---所有请求都会经过这个中间介
 app.use(function(req,res,next){
     if(req.session.isLogin && req.session.isLogin == 'true' || req.url.indexOf('/admin') == -1 || req.url =='/admin/login'){
         next();

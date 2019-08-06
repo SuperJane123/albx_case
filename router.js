@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const pagesController = require('./controllers/pagesController');
-const userController = require('./controllers/userController')
+const userController = require('./controllers/userController');
+const postController = require('./controllers/postController');
 
 
 
@@ -80,8 +81,12 @@ router.get('/index',pagesController.indexHtml)
 
 
 // ---------API接口处理区域-----------
-.post('/login',userController.login);
+.post('/login',userController.login)
 
 
+
+
+// 添加获取文章数据接口 /getPostInfo
+.get('/getPostInfo',postController.getPostInfo)
 
 module.exports = router;
