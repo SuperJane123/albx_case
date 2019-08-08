@@ -5,6 +5,7 @@ const router = express.Router();
 const pagesController = require('./controllers/pagesController');
 const userController = require('./controllers/userController');
 const postController = require('./controllers/postController');
+const cateController = require('./controllers/cateController')
 
 
 
@@ -81,12 +82,27 @@ router.get('/index',pagesController.indexHtml)
 
 
 // ---------API接口处理区域-----------
+// 1.登陆验证接口
+
 .post('/login',userController.login)
 
 
 
-
-// 添加获取文章数据接口 /getPostInfo
+// 2.添加获取文章数据接口 /getPostInfo
 .get('/getPostInfo',postController.getPostInfo)
+
+
+
+// 3.获取所有分类信息 /getAllcate
+.get('/getAllcate',cateController.getAllcate)
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
