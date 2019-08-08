@@ -16,8 +16,21 @@ limit ${(obj.pageNum-1)*obj.pageSize},${obj.pageSize}`
             console.log(err);
             callback(err);
         }else{
-            callback(null,resule);
-        };
+            // 查询总页数
+            sql = `SELECT count(*) as cnt from posts 
+            JOIN categories on posts.category_id = categories.id
+            JOIN users on posts.user_id = users.id`;
+
+            // 然后再次执行sql命令
+            conn.query(sql,(err2,total)=>{   //此时结果总数返回的是一个数据类型
+                if(err2){
+                    console.log(err2);
+                    callback(err2);
+                }else{
+                    callback(null,{resule,total:total[0].cnt});
+                }
+            })
+        }
     });
 
 };
