@@ -39,12 +39,12 @@ $('#feature').on('change',function(){
         success: function (res) {
             console.log(res)
             if(res.code === 200){
-                $('#prewImg').attr('src','../../uploads/'+res.img).show();
+                $('#prewImg').attr('src','../uploads/'+res.img).show();
                 // 把图片隐藏域的地址也赋值了
                 $('[name=feature]').val(res.img)
                 
             }else{
-                $('.alert-danger').attr('hidden',false);
+                $('.alert-danger').attr('hidden',false).fadeIn(500).delay(5000).fadeOut(500);
                 $('.alert-danger > span').text(res.img)
             }
         }
@@ -52,6 +52,33 @@ $('#feature').on('change',function(){
 
 });
 
+
+
+// 调用富文本框的方法,让富本框覆盖textarea
+CKEDITOR.replace( 'content' );
+
+
+// 点击保存，实现新增功能
+$('.btn-Save').on('click',function(e){
+    e.preventDefault();
+    CKEDITOR.instances.content.updateElement();
+    let data = $('form').serialize();
+    console.log(data);
+
+    // 请求ajax
+    $.ajax({
+        type: "post",
+        url: "/AddNewPost",
+        data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res)
+            if(res.code === 200){
+                location.href = '/admin/posts'
+            };
+        }
+    });
+});
 
 
 });

@@ -21,7 +21,7 @@ exports.login = function(req,res){
                 // 将当前用户储存到session中
                 req.session.currentUser = result;
             
-                // console.log(req.session)
+                console.log(req.session)
                 res.end(JSON.stringify({code:200,msg:"登陆成功！"}));
             }else{
                 res.json({code: 400,msg:"密码错误"});

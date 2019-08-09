@@ -6,7 +6,7 @@ const pagesController = require('./controllers/pagesController');
 const userController = require('./controllers/userController');
 const postController = require('./controllers/postController');
 const cateController = require('./controllers/cateController');
-const postAddController = require('./controllers/postAddController')
+const postAddController = require('./controllers/postAddController');
 
 
 
@@ -99,6 +99,8 @@ router.get('/index',pagesController.indexHtml)
 .post('/uploadFile',postAddController.uploadFile)
 
 
+// 5.处理新增文章数据的接口 /AddNewPost
+.post('/AddNewPost',postAddController.AddNewPost)
 
 
 
