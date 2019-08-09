@@ -5,7 +5,8 @@ const router = express.Router();
 const pagesController = require('./controllers/pagesController');
 const userController = require('./controllers/userController');
 const postController = require('./controllers/postController');
-const cateController = require('./controllers/cateController')
+const cateController = require('./controllers/cateController');
+const postAddController = require('./controllers/postAddController')
 
 
 
@@ -64,7 +65,6 @@ router.get('/index',pagesController.indexHtml)
 .get('/admin/settings',pagesController.settingsHtml)
 
 
-
 // 10.处理后台settings页面
 .get('/admin/slides',pagesController.slidesHtml)
 
@@ -82,19 +82,21 @@ router.get('/index',pagesController.indexHtml)
 
 
 // ---------API接口处理区域-----------
-// 1.登陆验证接口
+// 1.登陆验证接口 /login
 
 .post('/login',userController.login)
-
 
 
 // 2.添加获取文章数据接口 /getPostInfo
 .get('/getPostInfo',postController.getPostInfo)
 
 
-
-// 3.获取所有分类信息 /getAllcate
+// 3.获取所有分类信息 /getAllcates
 .get('/getAllcate',cateController.getAllcate)
+
+
+// 4.上传图片接口 /uploadImg
+.post('/uploadFile',postAddController.uploadFile)
 
 
 

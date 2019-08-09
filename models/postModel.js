@@ -30,7 +30,14 @@ where 1 = 1 `
             // 再创建sql，进行总记录的查询
             sql = `SELECT count(*) as cnt from posts 
             JOIN categories on posts.category_id = categories.id
-            JOIN users on posts.user_id = users.id`;
+            JOIN users on posts.user_id = users.id where 1= 1 `
+
+            if (obj.cate && obj.cate != "all") {    //obj.cate是分类id
+                sql += ` and category_id = ${obj.cate}`
+            };
+            if (obj.state && obj.state != "all") {    //obj.state是状态
+                sql += ` and posts.status = "${obj.state}"`
+            }
 
             // 然后再次执行sql命令
             conn.query(sql, (err2, total) => { //此时结果总数返回的是一个数据类型
