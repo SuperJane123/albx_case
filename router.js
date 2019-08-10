@@ -107,8 +107,15 @@ router.get('/index',pagesController.indexHtml)
 
 .get('/getPostById',postController.getPostById)
 
-// 7.处理编辑文章页面   /editPostById
+// 7.处理所有文章编辑功能   /editPostById
 .post('/editPostById',postController.editPostById)
+
+
+
+// 补漏：处理所有文章的删除功能 /
+.get('/deletePostById',postController.deletePostById)
+
+
 
 
 // 8.处理分类目录的编辑功能  /editcateById

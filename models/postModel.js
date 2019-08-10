@@ -106,7 +106,7 @@ exports.getPostById = (id,callback)=>{
 
 
 
-// 7.处理编辑文章页面
+// 4.处理编辑文章页面
 exports.editPostById = (obj,callback)=>{
     // 创建sql语句
     let sql = `UPDATE posts SET ? WHERE id = ?`
@@ -119,6 +119,21 @@ exports.editPostById = (obj,callback)=>{
         }
     });
 };
+
+
+exports.deletePostById = (obj,callback)=>{
+    let sql = `DELETE FROM posts WHERE id = ?`
+    console.log(obj)
+    conn.query(sql,obj,(err,result)=>{
+        if(err){
+            console.log(err);
+            callback(err);
+        }else{
+            callback(null)
+        }
+    });
+
+}
 
 
 

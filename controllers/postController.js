@@ -68,7 +68,7 @@ exports.getPostById = (req,res)=>{
 
 
 
-// 7.处理编辑文章页面
+// 4.处理编辑文章页面
 exports.editPostById = (req,res)=>{
     // 获取参数
     let data = req.body;
@@ -77,4 +77,19 @@ exports.editPostById = (req,res)=>{
         if(err){res.json({code: 400,msg: "编辑失败"})}
         else{res.json({code: 200,msg: "编辑成功"})}
     });
+};
+
+
+
+
+// 5.处理所有页面的删除功能
+exports.deletePostById = (req,res)=>{
+    // 获取id
+    let id = req.query.id;
+    console.log(id);
+    // 调用删除数据库
+    postModel.deletePostById(id,err=>{
+        if(err){res.json({code: 400,msg: "删除失败"})}
+        else{res.json({code: 200,msg: "删除成功"})}
+    })
 };

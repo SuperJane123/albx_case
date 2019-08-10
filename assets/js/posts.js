@@ -2,7 +2,7 @@ $(function(){
 
 // 定义全局的页面和页数量
 var pageNum = 1;
-var pageSize = 10;
+var pageSize = 3;
 
 
 // 把ajax封装未一个方法
@@ -81,6 +81,7 @@ $.ajax({
                 html+= ` <option value="${e.id}">${e.name}</option>`
             });
             $('.cateSelector').html(html);
+
     }
 });
 
@@ -97,6 +98,39 @@ $('.btn-search').on('click',function(){
     // 调用ajax重新加载数据
     init(obj)
 });
+
+
+
+// 实现删除功能，给删除注册点击事件
+    $('tbody').on('click','.btn-del',function(){
+        let id = $(this).data(('id'))
+         // console.log(id)
+         let length = $(this).parents('tr').siblings().length;
+         console.log(length)
+        if(confirm('请问确认删除吗？')){
+            $.ajax({
+                type: "get",
+                url: "/deletePostById",
+                data: {id},
+                dataType: "json",
+                success: function (res) {
+                    console.log(res)
+                    if(res.code === 200){
+                        if(length ===0){
+                            pageNum = pageNum-1
+                            init();
+                        }
+                         // 重新调用加载数据的方法
+                           
+    
+                    }else{
+                        alert(res.msg)
+                    };
+                }
+            });
+        }
+    
+    });
 
     
 })
