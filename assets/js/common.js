@@ -12,4 +12,27 @@ var itcast = {
 
         return routerName;
     },
-}
+
+
+
+    getParameter:(url)=>{
+        let str = url.substring(1);
+        let arr = str.split('&')
+        let temp = []
+        let obj={}
+        arr.forEach(e=>{
+            temp = e.split('=')
+            let key = temp[0];
+            let value = temp[1];
+            obj[key]  = value;
+        });
+        return obj;
+    }
+
+
+
+
+
+
+    
+};

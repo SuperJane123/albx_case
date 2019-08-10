@@ -104,11 +104,11 @@
             <td>{{ value.title}}</td>
             <td>{{ value.nickname}}</td>
             <td>{{ value.name }}</td>
-            <td class="text-center">{{ value.name }}</td>
+            <td class="text-center">{{ value.created }}</td>
             <td class="text-center">{{ value.status == "published" ? "已发布" :"草稿"}}</td>
             <td class="text-center">
-              <a href="javascript:;" class="btn btn-default btn-xs">编辑</a>
-              <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+              <a href="post-add?id={{value.id}}" class="btn btn-default btn-xs">编辑</a>
+              <a href="javascript:;" class="btn btn-danger btn-xs" data-id="{{value.id}}">删除</a>
             </td>
         </tr>
 

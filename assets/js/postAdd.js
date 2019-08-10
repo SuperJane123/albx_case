@@ -19,7 +19,7 @@ $(function(){
 
 
 
-// 获取图片信息
+// 注册图片上传事件
 $('#feature').on('change',function(){
     console.log(234)
     let file = this.files[0];
@@ -57,28 +57,77 @@ $('#feature').on('change',function(){
 // 调用富文本框的方法,让富本框覆盖textarea
 CKEDITOR.replace( 'content' );
 
+// 获取id号
+let id = itcast.getParameter(location.search).id;
+let data;
+
 
 // 点击保存，实现新增功能
 $('.btn-Save').on('click',function(e){
     e.preventDefault();
     CKEDITOR.instances.content.updateElement();
-    let data = $('form').serialize();
-    console.log(data);
+    // 获取表单数据
+    data = $('form').serialize();
+    // console.log(data);
 
-    // 请求ajax
-    $.ajax({
-        type: "post",
-        url: "/AddNewPost",
-        data,
+    // 判断是是否有id
+    if(id){
+        opt('/editPostById')    //请求编辑接口
+    
+    }else{
+       
+        opt('/AddNewPost')  //请求新增接口
+    }
+
+  
+});
+
+
+
+    // 因为新增和编辑请求ajax的步骤一样，所以封装成函数，直接调用即刻
+    function opt(url){
+        $.ajax({
+            type: "post",
+            url,
+            data,
+            dataType: "json",
+            success: function (res) {
+                console.log(res)
+                location.href = '/admin/posts'
+            }
+        });
+    }
+
+
+
+    // 请求ajax，获取文章内容信息
+
+if(id){
+      $.ajax({
+        type: "get",
+        url: "/getPostById?id="+id,
         dataType: "json",
         success: function (res) {
-            console.log(res)
-            if(res.code === 200){
-                location.href = '/admin/posts'
-            };
+            console.log(res)// 获取数据成功
+
+            // 以下是填充内容
+            $('#title').val(res.result.title);
+            $('#content').val(res.result.content)
+            $('#slug').val(res.result.slug)
+            $('#prewImg').attr('src','/uploads/'+res.result.feature).show();
+            $('#category').val(res.result.category_id)
+            $('[name=feature]').val(res.result.feature)
+            $('#status').val(res.result.status)
+            $('#created').val(res.result.created);
+            // 用隐藏域保存一个id
+            $('[name=id]').val(res.result.id)
+
         }
     });
-});
+}
+  
+
+
 
 
 });

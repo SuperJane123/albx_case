@@ -2,7 +2,7 @@ $(function(){
 
 // 定义全局的页面和页数量
 var pageNum = 1;
-var pageSize = 2;
+var pageSize = 10;
 
 
 // 把ajax封装未一个方法

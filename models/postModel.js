@@ -81,3 +81,41 @@ exports.AddNewPost = (obj,callback)=>{
         }
     });
 };
+
+
+
+
+
+
+// 3.根据id号查找相对应的数据信息
+exports.getPostById = (id,callback)=>{
+    // 创建sql语句，查找相对应的id
+    let sql = 'SELECT * FROM posts WHERE id ='+id
+
+    // 执行命令
+    conn.query(sql,(err,result)=>{
+        if(err){
+            console.log(err);
+            callback(err);
+        }else{
+            callback(null,result[0]);
+        }
+    });
+};
+
+
+
+
+4.// 7.处理编辑文章页面
+exports.editPostById = (obj,callback)=>{
+    // 创建sql语句
+    let sql = `UPDATE posts SET ? WHERE id = ?`
+    conn.query(sql,[obj,obj.id],(err)=>{
+        if(err){
+            console.log(err);
+            callback(err);
+        }else{
+            callback(null);
+        }
+    });
+};

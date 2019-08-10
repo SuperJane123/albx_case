@@ -103,6 +103,16 @@ router.get('/index',pagesController.indexHtml)
 .post('/AddNewPost',postController.AddNewPost)
 
 
+// 6.处理根据id号获取相对应的数据信息  /getPostById
+
+.get('/getPostById',postController.getPostById)
+
+// 7.处理编辑文章页面   /editPostById
+.post('/editPostById',postController.editPostById)
+
+
+
+
 
 
 
