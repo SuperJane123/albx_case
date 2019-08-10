@@ -2,7 +2,6 @@ $(function(){
     // 获取文章元素
     let menuPosts = $('#menu-posts');
     let settings = $('#menu-settings');
-    console.log(settings)
     // 获取当前路由名称
     let routerName = itcast.getRouterName(location.href);
 

@@ -111,6 +111,23 @@ router.get('/index',pagesController.indexHtml)
 .post('/editPostById',postController.editPostById)
 
 
+// 8.处理编辑文章页面   /editcateById
+.post('/editcateById',cateController.editcateById)
+
+
+
+// 9.处理编辑文章页面   /addNewCate
+.post('/addNewCate',cateController.addNewCate)
+
+
+
+
+
+
+
+
+
+
 
 
 
