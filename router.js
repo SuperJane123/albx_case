@@ -111,13 +111,21 @@ router.get('/index',pagesController.indexHtml)
 .post('/editPostById',postController.editPostById)
 
 
-// 8.处理编辑文章页面   /editcateById
+// 8.处理分类目录的编辑功能  /editcateById
 .post('/editcateById',cateController.editcateById)
 
 
 
-// 9.处理编辑文章页面   /addNewCate
+// 9.处理分类目录的添加功能  /addNewCate
 .post('/addNewCate',cateController.addNewCate)
+
+
+// 10.处理分类目录的删除功能  /deletCateById
+.get('/deletCateById',cateController.deletCateById)
+
+
+
+
 
 
 

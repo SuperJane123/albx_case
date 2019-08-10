@@ -8,8 +8,7 @@ $(function(){
         success: function (result) {
             console.log(result)
             // 调用模板引擎的方法
-            let html = template('Tempcate',result);
-            $('tbody').html(html);
+            $('tbody').html(template('Tempcate',result));
         }
     });
 
@@ -29,7 +28,7 @@ $(function(){
 
 
 
-    // 封装请求ajax功能
+    // 封装请求ajax功能(把信息读取到数据)
     function opt(url){
         $.ajax({
             type: "post",
@@ -62,9 +61,32 @@ $(function(){
     // 实现添加分类功能
     $('.btn-add').on('click',function(){
         // console.log(123)
-        // 获取表单内容
         opt('/addNewCate')
         
+    });
+
+
+
+    // 实现删除功能
+    $('tbody').on('click','.btn-del',function(){
+        // console.log(233)
+        let id = $(this).data('id')
+        console.log(id);
+        // 请求ajax
+        $.ajax({
+            type: "get",
+            url: "/deletCateById?id="+id,
+            dataType: "json",
+            success: function (res) {
+                // console.log(res)
+                if(res.code === 200){
+                    alert(res.msg)
+                }else{
+                    alert(res.msg)
+                }
+            }
+        });
+
     });
 
 

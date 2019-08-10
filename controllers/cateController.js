@@ -3,7 +3,7 @@
 const cateModel = require('../models/cateModel');
 
 
-
+// 处理获取所有文章的所有分类内容
 exports.getAllcate = (req,res)=>{
     // 读取数据找model
     cateModel.getAllcate((err,result)=>{
@@ -15,7 +15,7 @@ exports.getAllcate = (req,res)=>{
     });
 };
 
-// 处理编辑文章页面   /editcateById
+// 处理分类目录的编辑功能   /editcateById
 exports.editcateById = (req,res)=>{
     // 获取请求题参数
     let data = req.body;
@@ -44,6 +44,19 @@ exports.addNewCate = (req,res)=>{
     });
 
 
+};
+
+
+// 处理分类目录删除分类功能
+exports.deletCateById = (req,res)=>{
+    // 获取id
+    let id = req.query.id
+    console.log(id);
+    // 删除数据调用数据模块
+    cateModel.deletCateById(id,err=>{
+        if(err){res.json({code: 400,msg: "删除失败"})}
+        else{res.json({code: 200,msg: "删除成功"})}
+    })
 };
 
 
