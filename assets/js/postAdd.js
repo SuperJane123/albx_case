@@ -7,7 +7,7 @@ $(function(){
         dataType: "json",
         success: function (res) {
             // console.log(res)
-            let html = '';
+            let html = ' <option value="all">所有分类</option>'
             // 遍历数据生成结构
             res.result.forEach(e => {
                 html+= `<option value="${e.id}">${e.name}</option>`

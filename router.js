@@ -6,7 +6,7 @@ const pagesController = require('./controllers/pagesController');
 const userController = require('./controllers/userController');
 const postController = require('./controllers/postController');
 const cateController = require('./controllers/cateController');
-const postAddController = require('./controllers/postAddController');
+const uploadFile = require('./controllers/uploadController');
 
 
 
@@ -96,11 +96,11 @@ router.get('/index',pagesController.indexHtml)
 
 
 // 4.上传图片接口 /uploadImg
-.post('/uploadFile',postAddController.uploadFile)
+.post('/uploadFile',uploadFile.uploadFile)
 
 
 // 5.处理新增文章数据的接口 /AddNewPost
-.post('/AddNewPost',postAddController.AddNewPost)
+.post('/AddNewPost',postController.AddNewPost)
 
 
 

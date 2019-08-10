@@ -1,7 +1,6 @@
 // 这个模块主要负责处理写文章的业务逻辑
 const formidable = require('formidable');
 const path = require('path');
-const postAddModel = require('../models/postAddModel');
 
 // 上传图片的方法
 exports.uploadFile = (req,res)=>{
@@ -23,12 +22,12 @@ exports.uploadFile = (req,res)=>{
      */
     form.parse(req,(err,fields,files)=>{
         let filesName = path.basename(files.img.path)
-        console.log(filesName);
+        // console.log(filesName);
         if(err){
             console.log(err);
             res.json({code: 400,msg: "文件上传失败"})
         }else{
-            console.log(files);
+            // console.log(files);
             res.json({code: 200,msg: "文件上传成功",img:filesName})
         }
     });
@@ -36,19 +35,3 @@ exports.uploadFile = (req,res)=>{
 
 
 
-
-exports.AddNewPost = (req,res)=>{
-    // 获取请求体数据
-    let data = req.body;
-    // 现在获取的data数据里是少了3个值的，需要手动添加上去
-    data.views = 0;
-    data.likes = 0;
-    data.user_id = req.session.currentUser.id
-
-    // 读取数据model
-    postAddModel.AddNewPost(data,err=>{
-        if(err){res.json({code: 400,msg: "新增失败"}) }
-        else{res.json({code: 200,msg: "新增成功"})}
-            
-    });
-};

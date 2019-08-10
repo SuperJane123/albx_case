@@ -2,9 +2,15 @@
 // 因为有很多数据模块需要创建连接，所以把创建连接数据库的代码封装起来
 const conn = require('../utils/myconn');
 
+
+// 1.获取所有文章信息
+
 exports.getPostInfo = (obj, callback) => {
     // console.log(obj)
     // 创建sql语句，获取所有文章数据
+    let condition1 = ` and category_id = ${obj.cate}`
+    let condition2 = ` and posts.status = "${obj.state}"`
+
     let sql = `select posts.*,users.nickname,categories.name
 from posts
 join users on posts.user_id = users.id
@@ -12,10 +18,10 @@ join categories on posts.category_id = categories.id
 where 1 = 1 `
 
     if (obj.cate && obj.cate != "all") {    //obj.cate是分类id
-        sql += ` and category_id = ${obj.cate}`
+        sql += condition1
     };
     if (obj.state && obj.state != "all") {    //obj.state是状态
-        sql += ` and posts.status = "${obj.state}"`
+        sql += condition2 
     }
 
 
@@ -33,10 +39,10 @@ where 1 = 1 `
             JOIN users on posts.user_id = users.id where 2=2 `
 
             if (obj.cate && obj.cate != "all") {    //obj.cate是分类id
-                sql += ` and category_id = ${obj.cate}`
+                sql += condition1
             }
             if (obj.state && obj.state != "all") {    //obj.state是状态
-                sql += ` and posts.status = "${obj.state}"`
+                sql += condition2 
             }
 
             // 然后再次执行sql命令
@@ -54,4 +60,24 @@ where 1 = 1 `
         }
     });
 
+};
+
+
+
+
+
+// 2.新增文章写入数据
+
+exports.AddNewPost = (obj,callback)=>{
+    // 创建sql语句,?是占位符
+    let sql = `INSERT INTO posts set ?`;
+    // 执行sql命令
+    conn.query(sql,obj,(err,result)=>{
+        if(err){
+            console.log(err);
+            callback(err);
+        }else{
+            callback(null);
+        }
+    });
 };
