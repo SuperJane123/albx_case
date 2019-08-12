@@ -16,7 +16,7 @@ $(function(){
             url: "/getAllMenu",
             dataType: "json",
             success: function (res) {
-                // console.log(res)
+                console.log(res)
                 let html = template('Tempmenu',res)
                 $('tbody').html(html)
             }
@@ -57,14 +57,14 @@ $(function(){
 // 实现删除功能
 
     $('tbody').on('click','.btn-del',function(){
-        let data = $(this).data('title')
-        console.log(data)
+        let index = $(this).data('index')
+        // console.log(index);
         if(confirm('请问确认删除吗？')){
              // 请求ajax
         $.ajax({
             type: "get",
             url: "/deleteMenu",
-            data: {title:data},
+            data:{index},
             dataType: "json",
             success: function (res) {
                 if(res.code === 200){

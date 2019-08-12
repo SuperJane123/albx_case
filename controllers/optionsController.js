@@ -43,10 +43,10 @@ exports.addNewMenu = (req,res)=>{
 // 实现导航栏的删除功能
 exports.deleteMenu = (req,res)=>{
     
-    let title = req.query.title;
-    console.log(req.query);
+    let index = req.query.index;
+    console.log(index);
     // 调用数据模块
-    optionsModel.deleteMenu(title,(err,result)=>{
+    optionsModel.deleteMenu(index,(err,result)=>{
         if(err){
             res.json({code: 400,msg: "删除失败"})
         }else{

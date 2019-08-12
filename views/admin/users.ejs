@@ -13,9 +13,9 @@
         <h1>用户</h1>
       </div>
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
+      <div class="alert alert-danger" style="display:none">
+          <strong>提示！</strong><span>发生XXX错误</span>
+        </div> 
       <div class="row">
         <div class="col-md-4">
           <form>
@@ -38,7 +38,7 @@
               <input id="password" class="form-control" name="password" type="text" placeholder="密码">
             </div>
             <div class="form-group">
-              <button class="btn btn-primary" type="submit">添加</button>
+              <input class="btn btn-primary btn-add" type="button" value="添加">
             </div>
           </form>
         </div>
@@ -60,42 +60,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="text-center"><input type="checkbox"></td>
-                <td class="text-center"><img class="avatar" src="../assets/img/default.png"></td>
-                <td>i@zce.me</td>
-                <td>zce</td>
-                <td>汪磊</td>
-                <td>激活</td>
-                <td class="text-center">
-                  <a href="post-add.php" class="btn btn-default btn-xs">编辑</a>
-                  <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center"><input type="checkbox"></td>
-                <td class="text-center"><img class="avatar" src="../assets/img/default.png"></td>
-                <td>i@zce.me</td>
-                <td>zce</td>
-                <td>汪磊</td>
-                <td>激活</td>
-                <td class="text-center">
-                  <a href="post-add.php" class="btn btn-default btn-xs">编辑</a>
-                  <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-center"><input type="checkbox"></td>
-                <td class="text-center"><img class="avatar" src="../assets/img/default.png"></td>
-                <td>i@zce.me</td>
-                <td>zce</td>
-                <td>汪磊</td>
-                <td>激活</td>
-                <td class="text-center">
-                  <a href="post-add.php" class="btn btn-default btn-xs">编辑</a>
-                  <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
-                </td>
-              </tr>
+           
+             
             </tbody>
           </table>
         </div>
@@ -107,6 +73,23 @@
 
 
 <%- include('./layouts/admin_footer.ejs'); %>
+<script src="../../assets//vendors/template/template.js"></script>
+<script src="../../assets/js/user.js"></script>
+<script type="text/template" id="Tempuser">
+{{each data as value}}
+<tr>
+    <td class="text-center"><input type="checkbox"></td>
+    <td class="text-center"><img class="avatar" src="{{value.avatar}}"></td>
+    <td>{{value.email}}</td>
+    <td>{{value.slug}}</td>
+    <td>{{value.nickname}}</td>
+    <td>{{value.status}}</td>
+    <td class="text-center">
+      <a href="post-add.php" class="btn btn-default btn-xs">编辑</a>
+      <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+    </td>
+  </tr>
 
-</body>
-</html>
+
+{{/each}}
+</script>

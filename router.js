@@ -161,7 +161,14 @@ router.get('/index',pagesController.indexHtml)
 
 
 
+// 16.获取用户页面所有数据
+.get('/getAllUser',userController.getAllUser)
 
+
+
+
+// 17.处理添加用户功能 addNewUser
+.post('/addNewUser',userController.addNewUser)
 
 
 

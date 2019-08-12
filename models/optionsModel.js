@@ -53,7 +53,7 @@ exports.addNewMenu = (obj,callback)=>{
 
 
 // 实现导航菜单删除功能
-exports.deleteMenu = (title,callback)=>{
+exports.deleteMenu = (index,callback)=>{
     let sql = 'SELECT value FROM `options` WHERE id = 9'
     conn.query(sql,(err,resule)=>{
         if(err){
@@ -61,12 +61,8 @@ exports.deleteMenu = (title,callback)=>{
             callback(err);
         }else{
             let arr = JSON.parse(resule[0].value);
-            for(let i = 0;i<arr.length;i++){
-                if(arr[i].title == title){    
-                    arr.splice(i,1)
-                    break;
-                }
-            }
+                    arr.splice(index,1)
+                   
             let jsonStr = JSON.stringify(arr)
             sql = `update options set value = ? where id = 9`
             conn.query(sql,[jsonStr],(err2,resule2)=>{

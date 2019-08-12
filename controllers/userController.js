@@ -2,6 +2,7 @@
 const userModel = require('../models/usreModel.js');
 
 
+// 处理登陆验证
 exports.login = function(req,res){
     // 获取请求数据
     let data = req.body;
@@ -30,4 +31,38 @@ exports.login = function(req,res){
             res.json({code: 400,msg:"邮箱错误"});
         }
     });
+}
+
+
+
+// 实现获取所有用户数据
+exports.getAllUser = (req,res)=>{
+    userModel.getAllUser((err,result)=>{
+        if(err){
+            res.json({code: 400,msg: "获取数据失败"})
+        }else{
+            res.json({code: 200,msg: "获取数据成功",data:result})
+        }
+    })
+};
+
+
+
+
+
+// 处理添加新用户
+exports.addNewUser = (req,res)=>{
+    let data = req.body;
+    console.log(data);
+    data.id = null;
+    data.avatar = "/uploads/avatar.jpg";
+    data.status = "activated";
+    // 读取数据模块
+    userModel.addNewUser(data,err=>{
+        if(err){
+            res.json({code: 400,msg: "添加失败"})
+        }else{
+            res.json({code: 200,msg: "添加成功"})
+        }
+    })
 }
