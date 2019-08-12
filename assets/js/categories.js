@@ -6,7 +6,7 @@ $(function () {
             url: '/getAllcate',
             dataType: "json",
             success: function (result) {
-                console.log(result)
+                // console.log(result)
                 // 调用模板引擎的方法
                 $('tbody').html(template('Tempcate', result));
             }
@@ -39,9 +39,9 @@ $(function () {
             data: $('form').serialize(),
             dataType: "json",
             success: function (res) {
-                console.log(res)
+                // console.log(res)
                 if (res.code === 200) {
-                    $('.alert-danger').show().fadeIn(500).delay(2000).fadeOut(500);
+                    $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500);
                     $('.alert-danger > span').text(res.msg)
                     init()
                     // location.href ='/admin/categories';
@@ -54,7 +54,7 @@ $(function () {
 
 
     // 实现编辑功能
-    $('#btn-edit').on('click', function () {
+    $('#btn-edit').click(function () {
         // console.log(234)
         opt('/editcateById')
         $('#btn-edit').hide();
@@ -68,7 +68,7 @@ $(function () {
 
 
     // 实现添加分类功能
-    $('.btn-add').on('click', function () {
+    $('.btn-add').click(function () {
         // console.log(123)
         opt('/addNewCate')
         $('#id').val('');
@@ -110,9 +110,9 @@ $(function () {
 
 
     // 实现全选框全选，并弹出批量删除
-    $('.checkAll').on('click',function(){
+    $('.checkAll').click(function(){
         let statu = $(this).prop('checked');
-        console.log(statu);
+        // console.log(statu);
         $('tbody .cksingle').prop('checked',statu);
         if(statu === true){
             $('.btn-dels').fadeIn(500)
@@ -144,7 +144,35 @@ $(function () {
             $('.checkAll').prop('checked',false);
         }
         
-    })
+    });
+
+    
+
+    // 实现批量删除功能
+    $('.btn-dels').click(function(){
+      
+        // 用变量保存被选择中的单选框按钮
+        let arr = $('.cksingle:checked');
+        let ids = [];
+        for(let i = 0; i<arr.length;i++){
+            ids.push(arr[i].dataset['id']);
+        }
+       // console.log(ids)   //["5", "6", "7"]
+        // 请求ajax
+        $.ajax({
+            type: "get",
+            url: "/deletCateById?id=" + ids.join(','),
+            dataType: "json",
+            success: function (res) {
+                if(confirm('请问是否确认删除？')){
+                    alert(res.msg)
+                    init()
+                }
+            }
+        });
+        
+
+    });
     
 
 

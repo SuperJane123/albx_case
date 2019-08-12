@@ -52,10 +52,10 @@ exports.addNewCate = (obj,callback)=>{
 
 
 // 4.处理分类目录的删除功能
-exports.deletCateById = (obj,callback)=>{
-    console.log(obj)
-    let sql = `DELETE FROM categories WHERE id = ?`
-    conn.query(sql,obj,(err,result)=>{
+exports.deletCateById = (id,callback)=>{
+    // console.log(id)
+    let sql = `DELETE FROM categories WHERE id in (${id})`
+    conn.query(sql,[id],(err,result)=>{
         if(err){
             console.log(err);
             callback(err);

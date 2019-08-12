@@ -52,6 +52,7 @@ exports.deletCateById = (req,res)=>{
     // 获取id
     let id = req.query.id
     // console.log(id);
+    // console.log(id);
     // 删除数据调用数据模块
     cateModel.deletCateById(id,err=>{
         if(err){res.json({code: 400,msg: "删除失败"})}
