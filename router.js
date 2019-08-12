@@ -7,6 +7,7 @@ const userController = require('./controllers/userController');
 const postController = require('./controllers/postController');
 const cateController = require('./controllers/cateController');
 const uploadFile = require('./controllers/uploadController');
+const optionsController = require('./controllers/optionsController');
 
 
 
@@ -129,6 +130,18 @@ router.get('/index',pagesController.indexHtml)
 
 // 10.处理分类目录的删除功能  /deletCateById
 .get('/deletCateById',cateController.deletCateById)
+
+
+
+
+// 11.处理导航菜单栏   /addNewMenu
+.post('/addNewMenu',optionsController.addNewMenu)
+
+
+
+// 12.处理网站设置根据id获取内容信息 /getSettings
+.get('/getSettings',optionsController.getSettings)
+
 
 
 
