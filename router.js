@@ -134,18 +134,37 @@ router.get('/index',pagesController.indexHtml)
 
 
 
-// 11.处理导航菜单栏   /addNewMenu
+// 11.处理导航菜单栏获取数据功能  /getAllMenu
+.get('/getAllMenu',optionsController.getAllMenu)
+
+
+
+// 12.处理导航菜单栏添加功能   /addNewMenu
 .post('/addNewMenu',optionsController.addNewMenu)
 
 
 
-// 12.处理网站设置根据id获取内容信息 /getSettings
+
+// 13.处理导航菜单栏的删除功能
+.get('/deleteMenu',optionsController.deleteMenu)
+
+
+
+
+// 14.处理网站设置根据id获取内容信息 /getSettings
 .get('/getSettings',optionsController.getSettings)
 
 
 
-// 13.处理网站设置的保存设置功能  /saveSettings
+// 15.处理网站设置的保存设置功能  /saveSettings
 .post('/editSettings',optionsController.editSettings)
+
+
+
+
+
+
+
 
 
 

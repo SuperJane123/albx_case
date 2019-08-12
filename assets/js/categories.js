@@ -44,7 +44,6 @@ $(function () {
                     $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500);
                     $('.alert-danger > span').text(res.msg)
                     init()
-                    // location.href ='/admin/categories';
                 } else {
                     alert(res.msg)
                 }

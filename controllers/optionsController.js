@@ -2,6 +2,23 @@
 
 const optionsModel = require('../models/optionsModel');
 
+
+// 实现获取导航栏的数据
+exports.getAllMenu = (req,res)=>{
+    // 读取数据模块
+    optionsModel.getAllMenu((err,result)=>{
+        if(err){
+            res.json({code: 400,msg: "获取数据失败"})
+        }else{
+            res.json({code: 200,msg: "获取数据成功",data:result})
+        }
+    });
+};
+
+
+
+
+
 // 实现导航菜单添加
 exports.addNewMenu = (req,res)=>{
     // 获取参数
@@ -19,6 +36,27 @@ exports.addNewMenu = (req,res)=>{
 
     
 };
+
+
+
+
+// 实现导航栏的删除功能
+exports.deleteMenu = (req,res)=>{
+    
+    let title = req.query.title;
+    console.log(req.query);
+    // 调用数据模块
+    optionsModel.deleteMenu(title,(err,result)=>{
+        if(err){
+            res.json({code: 400,msg: "删除失败"})
+        }else{
+           
+            res.json({code: 200,msg: "删除成功"})
+        }
+    });
+};
+
+
 
 
 

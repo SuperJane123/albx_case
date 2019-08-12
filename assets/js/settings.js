@@ -1,5 +1,5 @@
 $(function(){
-    // console.log(23)
+    
     $.ajax({
         type: "get",
         url: "/getSettings",

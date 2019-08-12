@@ -1,6 +1,26 @@
 // 这个模块主要负责网站设置的数据操作
 const conn = require('../utils/myconn');
 
+
+// 实现导航菜单栏的所有数据
+exports.getAllMenu = (callback)=>{
+    let sql = 'SELECT value FROM `options` WHERE id = 9'
+    conn.query(sql,(err,resule)=>{
+        if(err){
+            console.log(err);
+            callback(err);
+        }else{
+            let jsonStr = resule[0].value
+            let arr = JSON.parse(jsonStr);
+            callback(null,arr)
+        }
+    });
+};
+
+
+
+
+
 // 实现导航菜单添加
 exports.addNewMenu = (obj,callback)=>{
     // 筛选出符合的数据
@@ -30,6 +50,37 @@ exports.addNewMenu = (obj,callback)=>{
 };
 
 
+
+
+// 实现导航菜单删除功能
+exports.deleteMenu = (title,callback)=>{
+    let sql = 'SELECT value FROM `options` WHERE id = 9'
+    conn.query(sql,(err,resule)=>{
+        if(err){
+            console.log(err);
+            callback(err);
+        }else{
+            let arr = JSON.parse(resule[0].value);
+            for(let i = 0;i<arr.length;i++){
+                if(arr[i].title == title){    
+                    arr.splice(i,1)
+                    break;
+                }
+            }
+            let jsonStr = JSON.stringify(arr)
+            sql = `update options set value = ? where id = 9`
+            conn.query(sql,[jsonStr],(err2,resule2)=>{
+                if(err2){
+                    console.log(err2);
+                    callback(err2);
+                }else{
+                    callback(null);
+                }
+            });
+        }
+    })
+    
+} 
 
 
 
