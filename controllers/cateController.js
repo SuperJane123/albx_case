@@ -19,7 +19,7 @@ exports.getAllcate = (req,res)=>{
 exports.editcateById = (req,res)=>{
     // 获取请求题参数
     let data = req.body;
-    console.log(data);
+    // console.log(data);
     // 把接收更新的数据更新到数据里
     cateModel.editcateById(data,err=>{
         if(err){ res.json({code: 400,msg: "编辑失败"})}
@@ -51,7 +51,7 @@ exports.addNewCate = (req,res)=>{
 exports.deletCateById = (req,res)=>{
     // 获取id
     let id = req.query.id
-    console.log(id);
+    // console.log(id);
     // 删除数据调用数据模块
     cateModel.deletCateById(id,err=>{
         if(err){res.json({code: 400,msg: "删除失败"})}

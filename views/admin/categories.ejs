@@ -7,9 +7,9 @@
         <h1>分类目录</h1>
       </div>
       <!-- 有错误信息时展示 -->
-      <!-- <div class="alert alert-danger">
-        <strong>错误！</strong>发生XXX错误
-      </div> -->
+       <div class="alert alert-danger" style="display:none">
+        <strong>提示</strong> <span>发生XXX错误</span>
+      </div> 
       <div class="r ow">
         <div class="col-md-4">
           <form>
@@ -34,12 +34,12 @@
         <div class="col-md-8">
           <div class="page-action">
             <!-- show when multiple checked -->
-            <a class="btn btn-danger btn-sm" href="javascript:;" style="display: none">批量删除</a>
+            <a class="btn btn-danger btn-sm btn-dels" href="javascript:;" style="display: none">批量删除</a>
           </div>
           <table class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <th class="text-center" width="40"><input type="checkbox"></th>
+                <th class="text-center" width="40"><input type="checkbox" class="checkAll"></th>
                 <th>名称</th>
                 <th>Slug</th>
                 <th class="text-center" width="100">操作</th>
@@ -72,7 +72,7 @@
   <script type="text/template" id="Tempcate">
   {{each result as value index}}
      <tr>
-      <td class="text-center"><input type="checkbox"></td>
+      <td class="text-center"><input type="checkbox" class="cksingle"></td>
       <td>{{value.name}}</td>
       <td>{{value.slug}}</td>
       <td class="text-center">

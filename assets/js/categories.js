@@ -1,20 +1,23 @@
-$(function(){
-    console.log(2123)
+$(function () {
     // 请求ajax获取所有分类
-    $.ajax({
-        type: "get",
-        url: '/getAllcate',
-        dataType: "json",
-        success: function (result) {
-            console.log(result)
-            // 调用模板引擎的方法
-            $('tbody').html(template('Tempcate',result));
-        }
-    });
+    function init() {
+        $.ajax({
+            type: "get",
+            url: '/getAllcate',
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                // 调用模板引擎的方法
+                $('tbody').html(template('Tempcate', result));
+            }
+        });
+
+    }
+    init()
 
 
     // 给编辑按钮注册点击事件
-    $('tbody').on('click','.btn-edit',function(){
+    $('tbody').on('click', '.btn-edit', function () {
         let id = $(this).data('id');
         //console.log(id);  //获取id成功
         $('#name').val($(this).data('name'))
@@ -29,7 +32,7 @@ $(function(){
 
 
     // 封装请求ajax功能(把信息读取到数据)
-    function opt(url){
+    function opt(url) {
         $.ajax({
             type: "post",
             url,
@@ -37,21 +40,27 @@ $(function(){
             dataType: "json",
             success: function (res) {
                 console.log(res)
-                if(res.code === 200){
+                if (res.code === 200) {
+                    $('.alert-danger').show().fadeIn(500).delay(2000).fadeOut(500);
+                    $('.alert-danger > span').text(res.msg)
+                    init()
+                    // location.href ='/admin/categories';
+                } else {
                     alert(res.msg)
-                    location.href ='/admin/categories';
-                }else{
-                    alert(res.msg)
-                }   
+                }
             }
         });
     }
 
 
     // 实现编辑功能
-    $('#btn-edit').on('click',function(){
+    $('#btn-edit').on('click', function () {
         // console.log(234)
         opt('/editcateById')
+        $('#btn-edit').hide();
+        $('.btn-add').show();
+        $('#name').val('')
+        $('#slug').val('')
     });
 
 
@@ -59,35 +68,84 @@ $(function(){
 
 
     // 实现添加分类功能
-    $('.btn-add').on('click',function(){
+    $('.btn-add').on('click', function () {
         // console.log(123)
         opt('/addNewCate')
-        
+        $('#id').val('');
+        $('#name').val('')
+        $('#slug').val('')
+
+
     });
 
 
 
     // 实现删除功能
-    $('tbody').on('click','.btn-del',function(){
+    $('tbody').on('click', '.btn-del', function () {
         // console.log(233)
         let id = $(this).data('id')
-        console.log(id);
-        // 请求ajax
-        $.ajax({
-            type: "get",
-            url: "/deletCateById?id="+id,
-            dataType: "json",
-            success: function (res) {
-                // console.log(res)
-                if(res.code === 200){
-                    alert(res.msg)
-                }else{
-                    alert(res.msg)
+        // console.log(id);
+        if (confirm('请问确认删除吗？')) {
+            // 请求ajax
+            $.ajax({
+                type: "get",
+                url: "/deletCateById?id=" + id,
+                dataType: "json",
+                success: function (res) {
+                    // console.log(res)
+                    if (res.code === 200) {
+                        alert(res.msg)
+                        init()
+                    } else {
+                        alert(res.msg)
+                    }
                 }
-            }
-        });
+            });
+
+        }
+
 
     });
+
+
+
+    // 实现全选框全选，并弹出批量删除
+    $('.checkAll').on('click',function(){
+        let statu = $(this).prop('checked');
+        console.log(statu);
+        $('tbody .cksingle').prop('checked',statu);
+        if(statu === true){
+            $('.btn-dels').fadeIn(500)
+        }else{
+            $('.btn-dels').fadeOut(500)
+        }
+    });
+
+
+
+    // 点击全部单选框实现全选,判断批量删除显示
+
+    $('tbody').on('click','.cksingle',function(){
+        // 用变量保存被选中的单选框的长度 input:checked
+        let cksLength = $('.cksingle:checked').length;
+        // console.log(cksLength);
+        if(cksLength >1) {
+            $('.btn-dels').fadeIn(500)
+
+        }else{
+            $('.btn-dels').fadeOut(500)
+
+        };
+
+        // 判断单选框的长度和被选中的长度是否一致，如果一致，全选框也选中
+        if(cksLength === $('.cksingle').length){
+            $('.checkAll').prop('checked',true);
+        }else{
+            $('.checkAll').prop('checked',false);
+        }
+        
+    })
+    
 
 
 });
