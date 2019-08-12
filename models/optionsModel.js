@@ -47,3 +47,26 @@ exports.getSettings = (callback)=>{
         }
     });
 };
+
+
+
+// 实现编辑网站设置的内容
+
+exports.editSettings = (obj,callback)=>{
+    let count = 0
+    for(let key in obj){
+        let sql = `UPDATE \`options\` set value = ?  WHERE \`key\` = ?`
+        conn.query(sql,[obj[key],key],(err,resule)=>{
+            if(err){
+                callback(err);
+                return;
+            }else{
+                count++;
+                if(count == 6){    //等执行完6次后，才返回结果
+                    callback(null);
+                }
+            }
+        });
+    }
+   
+};

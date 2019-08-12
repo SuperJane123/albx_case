@@ -144,6 +144,8 @@ router.get('/index',pagesController.indexHtml)
 
 
 
+// 13.处理网站设置的保存设置功能  /saveSettings
+.post('/editSettings',optionsController.editSettings)
 
 
 
