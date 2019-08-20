@@ -171,6 +171,10 @@ router.get('/index',pagesController.indexHtml)
 .post('/addNewUser',userController.addNewUser)
 
 
+// 18.处理用户页面的编辑功能
+.post('/editUser',userController.editUser)
+
+
 
 
 

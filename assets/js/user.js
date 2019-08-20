@@ -58,7 +58,54 @@ init()
 
 
 
+
+//   点击编辑获取内容
+  $('tbody').on('click','.btn-edit',function(){
+      //   console.log(123)fwef
+      $('#email').val($(this).data('email'))
+      $('#slug').val($(this).data('slug'))
+      $('#nickname').val($(this).data('nickname'))
+      $('#password').val($(this).data('password'))
+    //   添加id的隐藏域
+        $('[name=id]').val($(this).data('id'))
+      $('#btn-edit').show()
+      $('.btn-add').hide()
+       
+  })    
+
+
   
+
+//   事件编辑功能
+  $('#btn-edit').on('click',function(){
+    let data = $('form').serialize();
+    console.log(data)
+    // 请求ajax
+    $.ajax({
+        type: "post",
+        url: "/editUser",
+        data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res)
+            if(res.code === 200){
+                testMsg(res)
+                $('#email').val('')
+                $('#slug').val('')
+                $('#nickname').val('')
+                $('#password').val('')
+              //   添加id的隐藏域
+                  $('[name=id]').val('')
+                $('#btn-edit').hide()
+                $('.btn-add').show()
+                 
+                init()
+            }else {
+                testMsg(res)
+            }
+        }
+    });
+  })
 
 
 });

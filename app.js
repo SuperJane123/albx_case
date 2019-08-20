@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const session  = require('express-session');
 
 
-
 app.listen(9090,()=>{
     console.log('server is running on http://127.0.0.1:9090');
 });
@@ -26,7 +25,13 @@ app.use(session ({
     saveUninitialized: true,  //强制没有初始化的session保存到storage中
 }));
 
-
+app.use(function (req,res,next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Credentials","true");
+    next();
+  });
 
 // 设置模板引擎
 app.set('view engine','ejs');

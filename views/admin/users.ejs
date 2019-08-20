@@ -37,10 +37,14 @@
               <label for="password">密码</label>
               <input id="password" class="form-control" name="password" type="text" placeholder="密码">
             </div>
+            <input type="hidden" name="id" value="">
             <div class="form-group">
-              <input class="btn btn-primary btn-add" type="button" value="添加">
+              <input class="btn btn-primary btn-add" type="button" value="添加" >
+              <input class="btn btn-primary" type="button" value="编辑" id="btn-edit" style="display:none">
+
             </div>
           </form>
+          
         </div>
         <div class="col-md-8">
           <div class="page-action">
@@ -85,7 +89,7 @@
     <td>{{value.nickname}}</td>
     <td>{{value.status}}</td>
     <td class="text-center">
-      <a href="post-add.php" class="btn btn-default btn-xs">编辑</a>
+      <a href="javascript:;" class="btn btn-default btn-xs btn-edit" data-id={{value.id}} data-email={{value.email}} data-nickname={{value.nickname}} data-slug={{value.slug}} data-password= {{value.password}}>编辑</a>
       <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
     </td>
   </tr>

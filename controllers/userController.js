@@ -31,7 +31,7 @@ exports.login = function(req,res){
             res.json({code: 400,msg:"邮箱错误"});
         }
     });
-}
+};
 
 
 
@@ -63,6 +63,21 @@ exports.addNewUser = (req,res)=>{
             res.json({code: 400,msg: "添加失败"})
         }else{
             res.json({code: 200,msg: "添加成功"})
+        }
+    })
+};
+
+
+
+// 处理用户页面的编辑功能
+exports.editUser = (req,res)=>{
+    let data= req.body;
+    // 调用数据模块
+    userModel.editUser(data,err=>{
+        if(err){
+            res.json({code: 400,msg: "修改失败"})
+        }else {
+            res.json({code: 200,msg: "修改成功"})
         }
     })
 }

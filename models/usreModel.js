@@ -36,8 +36,6 @@ exports.getAllUser = (callback)=>{
 
 
 
-
-
 // 实现添加新用户
 exports.addNewUser = (obj,callback)=>{
     let sql = `INSERT INTO users set ?`
@@ -50,3 +48,19 @@ exports.addNewUser = (obj,callback)=>{
         }
     });
 };
+
+
+
+
+// 处理用户页面的编辑功能
+exports.editUser = (obj,callback)=>{
+    let sql = 'UPDATE users set ? WHERE id = ?'
+    conn.query(sql,[obj,obj.id],(err,result)=>{
+        if(err){
+            console.log(err)
+            callback(err);
+        }else{
+            callback(null)
+        }
+    })
+}
